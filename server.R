@@ -26,7 +26,7 @@ shinyServer(
     
     dat<-diamonds[sample(nrow(diamonds),500),]
     dat<-subset(dat,select=c(carat,cut,color,clarity,price))
-    variables = reactiveValues(if_trained=FALSE)
+    variables <- reactiveValues(if_trained=FALSE,model1=NULL)
     training<-dat
     levels(training$cut)<-c(1,2,3,4,5)
     levels(training$color)<-c(1,2,3,4,5,6,7)
@@ -52,7 +52,7 @@ shinyServer(
     observeEvent(input$train, {
       if(variables$if_trained==FALSE){
       withProgress(message = 'Training in progress...',
-                   {model1<-TrainModel(training)})
+                   {variables$model1<-TrainModel(training)})
       variables$if_trained<-TRUE
       output$text1<-renderText("Training finished")}
       else{output$text1<-renderText("The model has been trained.")}
@@ -60,7 +60,7 @@ shinyServer(
     
     observeEvent(input$price, {
       if(variables$if_trained==TRUE){
-        myModel<-model1
+        myModel<-variables$model1
         myInputs<-data.frame(carat=input$Weight,cut=as.factor(input$Cut),color=as.factor(input$Color),
                              clarity=as.factor(input$Clarity))
         prediction1<-PredictPrice(myModel,myInputs)
