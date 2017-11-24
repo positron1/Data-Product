@@ -1,0 +1,13 @@
+---
+title: "Tutorial"
+author: "Yue Yang"
+date: "November 23, 2017"
+output: html_document
+---
+
+## Tutorial
+This is an shiny app created for the final project of Coursera course "Developing Data Products". It is a predictor for diamond prices based on a trained model from the dataset "diamonds". For the training of the model, 500 samples from the dataset has been used. The machine learning algorithm used is the "random forrest" method.
+
+Before using the predictor, the user needs to train the predicting model by clicking "Train my model". After the training is finished, the user needs to specify the 4 properties of the diamond, which are the cut, color, clarity, and the carat(weight). After specifying these parameters, click "Price my diamond" to display the predicted price for the diamond.  
+
+Have fun!
